@@ -7,6 +7,7 @@ public:
     Primitive(Uint8 r, Uint8 g, Uint8 b, Uint8 a) : r(r), g(g), b(b), a(a) {};
     ~Primitive() {};
     void Draw(SDL_Renderer* renderer) {};
+    void ChangeColor(Uint8 r, Uint8 g, Uint8 b) {this->r = r; this->g = g; this->b = b;};
 };
 
 class Circle : public Primitive
@@ -48,4 +49,13 @@ public:
     void Draw(SDL_Renderer* renderer);
 private:
     void DrawTriangle(SDL_Renderer* renderer);
+};
+
+class Grid : public Primitive
+{
+public:
+    int32_t offset;
+    Grid(int32_t offset, Uint8 r = 0, Uint8 g = 0, Uint8 b = 0, Uint8 a = 255) : offset(offset), Primitive(r, g, b, a) {};
+    ~Grid() {};
+    void Draw(SDL_Renderer* renderer, int height, int width);
 };
